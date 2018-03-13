@@ -1,0 +1,1 @@
+insert into user  values (1,2,15,2800);
