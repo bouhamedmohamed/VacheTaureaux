@@ -1,56 +1,47 @@
 package com.mohamed.rest.vt.springboot2restservicevachetaureaux.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class User implements Serializable{
     @Id
     @GeneratedValue
-    private Long id;
-    private String name;
-    private int age;
-    private double salary;
+    private Long idUser;
+    private String nameUser;
+    @Column(unique=true)
+    private String loginUser;
+    private String pwdUser;
 
-    public Long getId() {
-        return id;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public String getName() {
-        return name;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public int getAge() {
-        return age;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public String getLoginUser() {
+        return loginUser;
     }
 
-    public double getSalary() {
-        return salary;
+    public void setLoginUser(String loginUser) {
+        this.loginUser = loginUser;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public String getPwdUser() {
+        return pwdUser;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
+    public void setPwdUser(String pwdUser) {
+        this.pwdUser = pwdUser;
     }
-
 }

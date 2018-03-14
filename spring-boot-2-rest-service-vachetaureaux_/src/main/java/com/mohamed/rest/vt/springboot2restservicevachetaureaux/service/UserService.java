@@ -14,9 +14,7 @@ public interface UserService {
 
     void deleteUserById(long id);
 
-    void deleteAllUsers();
-
-    boolean isUserExist(User user);
+    Optional<User> findByLoginUser(String userLogin);
 
     void saveUser(User user);
 

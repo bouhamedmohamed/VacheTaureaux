@@ -18,6 +18,8 @@ public class UserServiceImpl implements UserService {
         return repoUser.findById(id);
     }
 
+
+
     @Override
     public void updateUser(User currentUser) {
         repoUser.save(currentUser);
@@ -31,13 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteAllUsers() {
-        repoUser.deleteAll();
-    }
-
-    @Override
-    public boolean isUserExist(User user) {
-        return findById(user.getId()).isPresent();
+    public Optional<User> findByLoginUser(String userLogin) {
+        return repoUser.findByLoginUser(userLogin);
     }
 
     @Override
