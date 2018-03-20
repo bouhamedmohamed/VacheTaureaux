@@ -11,8 +11,6 @@ public class HistoryGame {
     @OneToOne(cascade = {CascadeType.ALL})
     private GameGrill gameGrill;
     private String correction;
-    @OneToOne
-    private Game game;
 
     public long getIdHistory() {
         return idHistory;
@@ -38,11 +36,4 @@ public class HistoryGame {
         this.correction = correction;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 }

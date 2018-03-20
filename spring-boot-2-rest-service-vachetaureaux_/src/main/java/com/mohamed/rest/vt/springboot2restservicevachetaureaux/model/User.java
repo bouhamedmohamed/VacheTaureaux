@@ -44,4 +44,20 @@ public class User implements Serializable{
     public void setPwdUser(String pwdUser) {
         this.pwdUser = pwdUser;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return idUser.equals(user.idUser);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return idUser.hashCode();
+    }
 }
