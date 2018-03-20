@@ -5,6 +5,8 @@ public enum Stat {
     FULL,
     END;
 
+    private boolean end;
+
     public static Stat nextStat(Stat stat) {
         Stat nextStat = END;
         if (!stat.equals(END)) {
@@ -18,4 +20,11 @@ public enum Stat {
         return (this.equals(FULL));
     }
 
+    public boolean isWait() {
+        return this.equals(WAIT);
+    }
+
+    public boolean isEnd() {
+        return this.equals(END);
+    }
 }

@@ -13,16 +13,15 @@ public class Game {
     @Id
     @GeneratedValue
     private long idGame;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private User winnerGame;
     @Enumerated(EnumType.STRING)
     private Stat statGame;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private GameGrill gameGrillPlayerOne;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private GameGrill gameGrillPlayerTwo;
-    @ElementCollection
-    @JoinColumn(name="idHistory")
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<HistoryGame> historyGames;
 
     public static final Logger logger = LoggerFactory.getLogger(Game.class);
@@ -79,14 +78,13 @@ public class Game {
         if (this.getStatGame().inGame()) {
             historyGame = checkVacheTaureaux(historyGame);
             this.historyGames.add(historyGame);
-            if(historyGame.getCorrection().equals(END_OF_GAME))
-            {
+            if (historyGame.getCorrection().equals(END_OF_GAME)) {
                 this.setWinnerGame(historyGame.getGameGrill().getPlayerGameSolution());
                 this.setStatGame(Stat.END);
-                logger.info(historyGame.getGameGrill().getPlayerGameSolution().getLoginUser()+" win this game");
+                logger.info(historyGame.getGameGrill().getPlayerGameSolution().getLoginUser() + " win this game");
             }
-        }
-        logger.info("Cannot start to play  in nan full game, wait for another player");
+        } else
+            logger.info("Cannot start to play  in nan full game, wait for another player");
         return this;
     }
 
@@ -110,7 +108,7 @@ public class Game {
         int settedNumberGameProposition = historyGame.getGameGrill().getSettedNumberGameSolution();
         String correction = calculateVacheTaureaux(vsNumber, settedNumberGameProposition);
         historyGame.setCorrection(correction);
-        logger.info(historyGame.getGameGrill().getPlayerGameSolution().getLoginUser()+" play make a new  proposition which contains " + correction);
+        logger.info(historyGame.getGameGrill().getPlayerGameSolution().getLoginUser() + " play make a new  proposition which contains " + correction);
         return historyGame;
     }
 

@@ -1,8 +1,6 @@
 package com.mohamed.rest.vt.springboot2restservicevachetaureaux.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class GameGrill {
@@ -10,6 +8,7 @@ public class GameGrill {
     @GeneratedValue
     private long idGameSolution;
     private  int settedNumberGameSolution;
+    @OneToOne
     private  User playerGameSolution;
 
     public GameGrill() {

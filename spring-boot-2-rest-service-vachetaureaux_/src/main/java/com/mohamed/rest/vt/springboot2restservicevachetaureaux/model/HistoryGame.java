@@ -8,7 +8,7 @@ public class HistoryGame {
     @Id
     @GeneratedValue
     private long idHistory;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private GameGrill gameGrill;
     private String correction;
     @OneToOne
