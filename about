@@ -1,0 +1,45 @@
+http://localhost:8080/api/user/
+
+POST create user
+{
+		"idUser": 3,
+	"nameUser": "oreo",
+	"loginUser":"oreo@gmail.com",
+	"pwdUser":"oreon@3000"
+}
+
+http://localhost:8080/vt/game/
+Post create game
+{   
+	"settedNumberGameSolution": "1234",
+	"playerGameSolution":{
+		"idUser": 3,
+	"nameUser": "oreo",
+	"loginUser":"oreo@gmail.com",
+	"pwdUser":"oreon@3000"
+}
+}
+
+http://localhost:8080/vt/game/joint/9
+  PUT joint game
+{   
+	"settedNumberGameSolution": "3658",
+	"playerGameSolution":{
+		"idUser": 1,
+	"nameUser": "bouhamed@gmail.com",
+	"loginUser":"Mohamed",
+	"pwdUser":"2030"
+}
+
+}
+
+http://localhost:8080/vt/game/tour/3
+Put plau tour 
+{
+	"gameGrill":{   
+	"settedNumberGameSolution": "1265",
+	"playerGameSolution":{
+		"idUser": 2
+}
+}
+}
