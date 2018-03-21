@@ -1,17 +1,19 @@
 package com.mohamed.rest.vt.springboot2restservicevachetaureaux.service;
 
-import com.mohamed.rest.vt.springboot2restservicevachetaureaux.Repo.CrudRepositoryUser;
+import com.mohamed.rest.vt.springboot2restservicevachetaureaux.Repo.DAORepositoryUser;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
-    CrudRepositoryUser repoUser;
+    private DAORepositoryUser repoUser;
 
     @Override
     public Optional<User> findById(long id) {

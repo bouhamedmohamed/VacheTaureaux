@@ -2,7 +2,6 @@ package com.mohamed.rest.vt.springboot2restservicevachetaureaux.service;
 
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.Game;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.GameGrill;
-import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.HistoryGame;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.User;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +13,9 @@ public interface GameService {
 
     Game createGame(GameGrill gameGrill);
 
-    Game jointGame(long id, GameGrill gameGrill);
-
     boolean isJoinableGame(long id);
 
     boolean isCloseGame(long id);
-
-    void addIteration(HistoryGame historyGame, long id);
 
     List<Game> getAllGames();
 
@@ -31,4 +26,6 @@ public interface GameService {
     int countWinGames(User user);
 
     int countGames(User user);
+
+    void deletGame(long idGame);
 }

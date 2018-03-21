@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface CrudRepositoryGame extends JpaRepository<Game, Long> {
+public interface DAORepositoryGame extends JpaRepository<Game, Long> {
     @Query("SELECT count(*) FROM Game p WHERE p.winnerGame = :user")
     int countWin(@Param("user") User user);
     @Query("SELECT count(*) FROM Game p WHERE (p.gameGrillPlayerOne.playerGameSolution= :user) or (p.gameGrillPlayerTwo.playerGameSolution=:user)")

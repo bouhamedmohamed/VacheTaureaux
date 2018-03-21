@@ -1,43 +1,34 @@
 package com.mohamed.rest.vt.springboot2restservicevachetaureaux.service;
 
-import com.mohamed.rest.vt.springboot2restservicevachetaureaux.Repo.CrudRepositoryGame;
+import com.mohamed.rest.vt.springboot2restservicevachetaureaux.Repo.DAORepositoryGame;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.Game;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.GameGrill;
-import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.HistoryGame;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService {
     @Autowired
-    CrudRepositoryGame crudRepositoryGame;
+    private DAORepositoryGame DAORepositoryGame;
 
     @Override
     public Game createGame(GameGrill gameGrill) {
         Game game = new Game();
         game = game.createGame(gameGrill);
-        crudRepositoryGame.save(game);
+        DAORepositoryGame.save(game);
         return game;
     }
 
-    @Override
-    public Game jointGame(long gameId, GameGrill gameGrill) {
-
-        Optional<Game> gameById = crudRepositoryGame.findById(gameId);
-        if (gameById.isPresent()) {
-            gameById = Optional.ofNullable(gameById.get().jointGame(gameGrill));
-        }
-        return gameById.get();
-
-    }
 
     @Override
     public boolean isJoinableGame(long gameId) {
-        Optional<Game> gameById = crudRepositoryGame.findById(gameId);
+        Optional<Game> gameById = DAORepositoryGame.findById(gameId);
         if (gameById.isPresent()) {
             return gameById.get().getStatGame().isWait();
 
@@ -47,44 +38,44 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public boolean isCloseGame(long gameId) {
-        Optional<Game> gameById = crudRepositoryGame.findById(gameId);
+        Optional<Game> gameById = DAORepositoryGame.findById(gameId);
         if (gameById.isPresent()) {
             return gameById.get().getStatGame().isEnd();
         }
         return false;
     }
 
-    @Override
-    public void addIteration(HistoryGame historyGame, long gameId) {
-        Optional<Game> gameById = crudRepositoryGame.findById(gameId);
-        if (gameById.isPresent()) {
-            gameById.get().addGameTour(historyGame);
-            crudRepositoryGame.save(gameById.get());
-        }
-    }
 
     @Override
     public List<Game> getAllGames() {
-        return crudRepositoryGame.findAll();
+        return DAORepositoryGame.findAll();
     }
 
     @Override
     public Optional<Game> getGameById(long gameId) {
-        return crudRepositoryGame.findById(gameId);
+        return DAORepositoryGame.findById(gameId);
     }
 
     @Override
     public void updateGame(Game game) {
-        crudRepositoryGame.save(game);
+        DAORepositoryGame.save(game);
     }
 
     @Override
     public int countWinGames(User user) {
-        return crudRepositoryGame.countWin(user);
+        return DAORepositoryGame.countWin(user);
     }
 
     @Override
     public int countGames(User user) {
-        return crudRepositoryGame.countGames(user);
+        return DAORepositoryGame.countGames(user);
+    }
+
+    @Override
+    public void deletGame(long gameId) {
+        Optional<Game> gameById = DAORepositoryGame.findById(gameId);
+        if (gameById.isPresent()) {
+            DAORepositoryGame.delete(gameById.get());
+        }
     }
 }
