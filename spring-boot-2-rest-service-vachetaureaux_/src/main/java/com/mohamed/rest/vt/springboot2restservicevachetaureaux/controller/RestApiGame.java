@@ -27,6 +27,8 @@ public class RestApiGame {
 
     @Autowired
     GameService gameService; //Service which will do all data retrieval/manipulation work
+    @Autowired
+    UserService userService;
 
     // -------------------Retrieve All Games---------------------------------------------
 
@@ -54,6 +56,39 @@ public class RestApiGame {
         }
         return new ResponseEntity<Game>(game.get(), HttpStatus.OK);
     }
+
+    // -------------------get won Game------------------------------------------
+
+    @RequestMapping(value = "/games/wins/{userlogin}", method = RequestMethod.GET)
+    public ResponseEntity<?> getWinGame(@PathVariable("userlogin") String userLogin) {
+        logger.info("Fetching  Won games of{}", userLogin);
+
+        Optional<User> user = userService.findByLoginUser(userLogin);
+        if (!user.isPresent()) {
+            logger.error("User with login  {} not found.", userLogin);
+            return new ResponseEntity(new CustomErrorType("User with login " + userLogin
+                    + " not found"), HttpStatus.NOT_FOUND);
+        }
+        int countWins = gameService.countWinGames(user.get());
+        return new ResponseEntity<>(countWins, HttpStatus.OK);
+    }
+
+    // -------------------get played Games ------------------------------------------
+
+    @RequestMapping(value = "/games/games/{userlogin}", method = RequestMethod.GET)
+    public ResponseEntity<?> getGames(@PathVariable("userlogin") String userLogin) {
+        logger.info("Fetching  played games of{}", userLogin);
+
+        Optional<User> user = userService.findByLoginUser(userLogin);
+        if (!user.isPresent()) {
+            logger.error("User with login {} not found.", userLogin);
+            return new ResponseEntity(new CustomErrorType("User with login " + userLogin
+                    + " not found"), HttpStatus.NOT_FOUND);
+        }
+        int games = gameService.countGames(user.get());
+        return new ResponseEntity<>(games, HttpStatus.OK);
+    }
+
 
     // -------------------Create a Game-------------------------------------------
 

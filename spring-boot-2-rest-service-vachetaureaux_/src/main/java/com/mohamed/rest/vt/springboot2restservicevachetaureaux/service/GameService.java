@@ -3,6 +3,7 @@ package com.mohamed.rest.vt.springboot2restservicevachetaureaux.service;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.Game;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.GameGrill;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.HistoryGame;
+import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public interface GameService {
 
     void updateGame(Game game);
 
+    int countWinGames(User user);
+
+    int countGames(User user);
 }

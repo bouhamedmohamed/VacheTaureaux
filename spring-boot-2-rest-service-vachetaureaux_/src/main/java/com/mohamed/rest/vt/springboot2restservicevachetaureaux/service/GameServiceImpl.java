@@ -4,6 +4,7 @@ import com.mohamed.rest.vt.springboot2restservicevachetaureaux.Repo.CrudReposito
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.Game;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.GameGrill;
 import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.HistoryGame;
+import com.mohamed.rest.vt.springboot2restservicevachetaureaux.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,5 +76,15 @@ public class GameServiceImpl implements GameService {
     @Override
     public void updateGame(Game game) {
         crudRepositoryGame.save(game);
+    }
+
+    @Override
+    public int countWinGames(User user) {
+        return crudRepositoryGame.countWin(user);
+    }
+
+    @Override
+    public int countGames(User user) {
+        return crudRepositoryGame.countGames(user);
     }
 }
