@@ -52,12 +52,12 @@ public class User implements Serializable{
 
         User user = (User) o;
 
-        return idUser.equals(user.idUser);
+        return loginUser.equals(user.loginUser);
 
     }
 
     @Override
     public int hashCode() {
-        return idUser.hashCode();
+        return loginUser.hashCode();
     }
 }
