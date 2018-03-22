@@ -102,11 +102,7 @@ public class RestApiGame {
             return new ResponseEntity(new CustomErrorType("We cant create a new game" ), HttpStatus.CONFLICT);
         }
 
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/user/{gameId}").buildAndExpand(
-                game.getIdGame()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(game, HttpStatus.CREATED);
     }
 
     // ------------------- Join  a Game ------------------------------------------------

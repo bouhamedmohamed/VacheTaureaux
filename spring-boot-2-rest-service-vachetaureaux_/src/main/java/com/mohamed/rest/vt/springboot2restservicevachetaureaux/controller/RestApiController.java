@@ -60,11 +60,7 @@ public class RestApiController {
                     + " already exist"), HttpStatus.CONFLICT);
         }
         userService.saveUser(user);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/user/{userlogin}").buildAndExpand(
-                user.getLoginUser()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 
     // ------------------- Update a User ------------------------------------------------
