@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RestController
 @RequestMapping("/vt")
 public class RestApiGame {

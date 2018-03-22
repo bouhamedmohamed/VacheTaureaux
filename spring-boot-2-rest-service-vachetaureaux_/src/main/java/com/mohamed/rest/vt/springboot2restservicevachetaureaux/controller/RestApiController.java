@@ -13,7 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
@@ -24,7 +24,6 @@ public class RestApiController {
     UserService userService; //Service which will do all data retrieval/manipulation work
 
     // -------------------Retrieve All Users---------------------------------------------
-
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
         List<User> users = userService.findAllUsers();
@@ -36,8 +35,7 @@ public class RestApiController {
     }
 
     // -------------------Retrieve Single User------------------------------------------
-
-    @RequestMapping(value = "/user/{userlogin}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{userlogin}", method = RequestMethod.GET )
     public ResponseEntity<?> getUser(@PathVariable("userlogin") String userLogin) {
         logger.info("Fetching User with login {}", userLogin);
 
